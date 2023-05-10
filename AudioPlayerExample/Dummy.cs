@@ -9,7 +9,7 @@ internal static class Dummy
 {
     public static ushort _id = 0;
 
-    public static (ReferenceHub Dummy, AudioPlayerBase AudioPlayer) Spawn()
+    public static AudioPlayerBase Spawn()
     {
         var playerObject = UnityEngine.Object.Instantiate(NetworkManager.singleton.playerPrefab);
         var fakeConnection = new FakeConnection(_id++);
@@ -25,12 +25,12 @@ internal static class Dummy
 
         NetworkServer.AddPlayerForConnection(fakeConnection, playerObject);
         dummy.roleManager.ServerSetRole(RoleTypeId.Tutorial, RoleChangeReason.RemoteAdmin, RoleSpawnFlags.UseSpawnpoint);
-        return (dummy, AudioPlayerBase.Get(dummy));
+        return AudioPlayerBase.Get(dummy);
     }
 
     public class FakeConnection : NetworkConnectionToClient
     {
-        public FakeConnection(int connectionId) : base(connectionId, false, 0f)
+        public FakeConnection(int connectionId) : base(connectionId)
         {
         }
 

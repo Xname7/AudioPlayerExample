@@ -3,6 +3,7 @@ using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 using SCPSLAudioApi;
+using SCPSLAudioApi.AudioCore;
 using System.IO;
 using VoiceChat;
 
@@ -36,7 +37,7 @@ internal sealed class Plugin
     private void OnRoundStart()
     {
         Dummy._id = 0;
-        var audioPlayer = Dummy.Spawn().AudioPlayer;
+        AudioPlayerBase audioPlayer = Dummy.Spawn();
         audioPlayer.BroadcastChannel = VoiceChatChannel.Intercom; // You can change this to any channel you want so dummy can be heard by different players.
 
         if (!string.IsNullOrEmpty(Config.AudioToPlay))
